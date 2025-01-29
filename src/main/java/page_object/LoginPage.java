@@ -20,7 +20,8 @@ public class LoginPage {
     public final By entranceTitle = By.xpath(".//h2[text()='Вход']");
     private final By constructorButton = By.xpath(".//p[text()='Конструктор']");
     private final By logoLink = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']");
-    private final By loginAnimation = By.xpath(".//img[@src='./static/media/loading.89540200.svg' and @alt='loading animation']");
+    public static final String REAL_USER_EMAIL = "garafutdinova.m@yandex.ru";
+    public static final String REAL_USER_PASS = "Paroll";
 
     public LoginPage(WebDriver driver) {
         LoginPage.driver = driver;
@@ -81,12 +82,6 @@ public class LoginPage {
                 .until(ExpectedConditions.elementToBeClickable(logoLink));
         driver.findElement(logoLink).click();
     }
-    @Step("Ожидание загрузки страницы полностью, анимация исчезнет.")
-    public void waitInvisibilityAnimation() {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.invisibilityOfElementLocated(loginAnimation));
-    }
-
 
 }
 

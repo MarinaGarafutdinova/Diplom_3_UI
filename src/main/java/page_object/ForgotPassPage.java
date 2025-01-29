@@ -17,6 +17,7 @@ public class ForgotPassPage {
 
     public ForgotPassPage(WebDriver driver) {
         ForgotPassPage.driver = driver;
+
     }
 
     @Step("Клик по ссылке Войти")

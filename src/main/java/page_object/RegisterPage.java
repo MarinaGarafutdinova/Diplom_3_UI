@@ -20,7 +20,8 @@ public class RegisterPage {
     private final By registerButton = By.xpath(".//button[text()='Зарегистрироваться']");
     private final By enterButton = By.xpath(".//a[text()='Войти']");
     public final By errorTextForFalsePass = By.xpath(".//p[text()='Некорректный пароль']");
-    private final By registerAnimation = By.xpath(".//img[@src='./static/media/loading.89540200.svg' and @alt='loading animation']");
+
+
     public RegisterPage(WebDriver driver) {
         RegisterPage.driver = driver;
     }
@@ -68,10 +69,5 @@ public class RegisterPage {
         driver.findElement(enterButton).click();
     }
 
-    @Step("Ожидание загрузки страницы полностью, анимация исчезнет.")
-    public void waitInvisibilityAnimation() {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.invisibilityOfElementLocated(registerAnimation));
-    }
 
 }

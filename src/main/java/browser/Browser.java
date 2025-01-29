@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
+import java.util.concurrent.TimeUnit;
 
 
 public class Browser {
@@ -23,12 +23,12 @@ public class Browser {
         switch (browserType) {
             case CHROME:
                 ChromeOptions options = new ChromeOptions();
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(options);
                 break;
 
 
             case YANDEX:
-                System.setProperty("webdriver.chrome.driver", "D:/ProjectsJava/yandexdriver.exe");
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
                 driver =  new ChromeDriver();
                 break;
             default:

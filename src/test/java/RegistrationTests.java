@@ -1,12 +1,20 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import page_object.MainPage;
+import page_object.LoginPage;
 import page_object.RegisterPage;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
 public class RegistrationTests extends BaseUITest {
+    private final String name;
+    private final String email;
+
+    public RegistrationTests() {
+        this.name = "Mari"+ RandomStringUtils.randomAlphabetic(3);
+        this.email = "Mari"+ RandomStringUtils.randomAlphabetic(3)+ "@yandex.ru";
+    }
 
     @Test
     @DisplayName("Регистрация пользователя с валидным паролями")
@@ -15,14 +23,13 @@ public class RegistrationTests extends BaseUITest {
 
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.openRegisterPage();
-        registerPage.setUserName("MARI");
-        registerPage.setUserEmail("Mari@yandrx.ru");
+        registerPage.setUserName(name);
+        registerPage.setUserEmail(email);
         registerPage.setUserPassword(randomAlphanumeric(6, 20));
         registerPage.clickRegisterButton();
-        MainPage mainPage = new MainPage(driver);
-        mainPage.openMainPage();
+        LoginPage loginPage = new LoginPage(driver);
         Assert.assertTrue("Авторизация не успешная",
-                driver.findElement(mainPage.titleMainPage).isDisplayed());
+                driver.findElement(loginPage.entranceTitle).isDisplayed());
     }
 
     @Test
@@ -32,8 +39,8 @@ public class RegistrationTests extends BaseUITest {
 
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.openRegisterPage();
-        registerPage.setUserName("MARI");
-        registerPage.setUserEmail("Mari@yandrx.ru");
+        registerPage.setUserName(name);
+        registerPage.setUserEmail(email);
         registerPage.setUserPassword(randomAlphanumeric(4, 5));
         registerPage.clickRegisterButton();
         Assert.assertTrue("Текст об ошибке отсутствует",

@@ -19,15 +19,15 @@ public class MainPage {
     private final By bunsTab = By.xpath("//span[text()='Булки']");
     private final By saucesTab = By.xpath("//span[text()='Соусы']");
     private final By fillingsTab = By.xpath("//span[text()='Начинки']");
-    public final By bunImg = By.xpath(".//p[text()='Краторная булка N-200i']");
-    public final By sauceImg = By.xpath(".//p[text()='Соус фирменный Space Sauce']");
-    public final By fillingImg = By.xpath(".//p[text()='Говяжий метеорит (отбивная)']");
     public final By titleMainPage = By.xpath(".//h1[@class='text text_type_main-large mb-5 mt-10']");
-    private final By mainAnimation = By.xpath(".//img[@src='./static/media/loading.89540200.svg' and @alt='loading animation']");
+    private final By activeTabSauces = By.xpath(".//div[contains(@class, 'tab_tab_type_current__2BEPc')]/span[contains(text(), 'Соусы')]");
+    private final By activeTabBuns = By.xpath(".//div[contains(@class, 'tab_tab_type_current__2BEPc')]/span[contains(text(), 'Булки')]");
+    private final By activeTabFillings = By.xpath(".//div[contains(@class, 'tab_tab_type_current__2BEPc')]/span[contains(text(), 'Начинки')]");
 
 
     public MainPage(WebDriver driver) {
         MainPage.driver = driver;
+
     }
 
     public void openMainPage() {
@@ -49,7 +49,6 @@ public class MainPage {
                 .until(ExpectedConditions.elementToBeClickable(profileButton));
         driver.findElement(profileButton).click();
     }
-
 
     @Step("Клик по вкладке Булки")
     public void clickBunsTab() {
@@ -80,11 +79,20 @@ public class MainPage {
         return driver.findElement(titleMainPage).isDisplayed();
     }
 
-    @Step("Ожидание загрузки страницы полностью, анимация исчезнет.")
-    public void waitInvisibilityAnimation() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.invisibilityOfElementLocated(mainAnimation));
 
+    @Step("Вкладка Булки выбрана")
+    public boolean isBunsTabSelected() {
+        return driver.findElement(activeTabBuns).isDisplayed();
+    }
+
+    @Step("Вкладка Соусы выбрана")
+    public boolean isSaucesTabSelected() {
+        return driver.findElement(activeTabSauces).isDisplayed();
+    }
+
+    @Step("Вкладка Начинки выбрана")
+    public boolean isFillingsTabSelected() {
+        return driver.findElement(activeTabFillings).isDisplayed();
     }
 }
 
